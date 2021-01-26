@@ -1,0 +1,75 @@
+<div id="myDIV" class="header">
+  <h2>Sepet</h2>
+  <input type="text" id="urun" placeholder="Ürün...">
+  <button style="background:red;color:white" onclick="addBox()" class="addBtn">Ekle</button>
+  <span>Sayaç : </span><button id="count" style="background:black;color:white"></button>
+
+</div>
+<ul id="liste"><li>Elma</li><li>Ekmek</li><li>Peynir</li><li>Zeytin</li></ul>
+
+
+<script>
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("button");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+document.getElementById("count").innerHTML = myNodelist.length;
+
+
+
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+// Create a new list item when clicking on the "Add" button
+function addBox() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("urun").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("liste").appendChild(li);
+  }
+  document.getElementById("urun").value = "";
+
+
+  var span = document.createElement("button");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+    document.getElementById("count").innerHTML = myNodelist.length;
+
+}
+
+
+</script>
